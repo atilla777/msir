@@ -20,12 +20,9 @@
 //     import "some-package"
 //
 
-// Theme changer
-import { themeChange } from 'theme-change'
-themeChange()
-
 // AlpineJS
-import "alpinejs"
+import Alpine from "alpinejs"
+Alpine.start()
 
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
@@ -35,13 +32,15 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 let liveSocket = new LiveSocket("/live", Socket, {
     params: {_csrf_token: csrfToken},
+    // Alpine config
     dom: {
       onBeforeElUpdated(from, to){
-        if(from.__x){ window.Alpine.clone(from.__x, to) }
+        if(from.__x) { window.Alpine.clone(from.__x, to) }
+        // TODO: use or remove
+        // if (from._x_dataStack) { window.Alpine.clone(from, to) }
       }
     }
   })
