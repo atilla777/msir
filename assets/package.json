@@ -3,10 +3,10 @@
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
-    "postcss-import": "^14.0.2",
     "tailwindcss": "^3.0.7"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.0.0-beta3",
     "alpinejs": "^3.7.1",
     "daisyui": "^1.20.0"
   }

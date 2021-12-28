@@ -20,6 +20,9 @@
 //     import "some-package"
 //
 
+// Font awesome
+import "@fortawesome/fontawesome-free/js/all"
+
 // AlpineJS
 import Alpine from "alpinejs"
 Alpine.start()
