@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" x-bind:data-theme="currentTheme" x-data="{currentTheme: 'dark'}">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -11,38 +11,81 @@
   </head>
   <body>
     <header>
-      <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box">
-        <div class="flex-none">
-          <button class="btn btn-square btn-ghost">
-            <span class="text-b">
-              MSIR
-            </span>
-          </button>
+      <div class="navbar mb-2 bg-base-300">
+        <div class="flex-none px-2 mx-2">
+          <a class="text-lg font-bold">
+            <i class="fa-brands fa-phoenix-squadron" />
+            MSIR
+          </a>
         </div> 
         <div class="flex-1 px-2 mx-2">
-          <span class="text-lg font-bold">
-                  With two icons
-          </span>
-
-          <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-            <span class="text-lg font-bold">
-              <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %>
-            </span>
-          <% end %>
-        </div> 
-        <div class="flex-none">
-          <select data-choose-theme>
-            <option value="light">light</option>
-            <option value="dark">dark</option>
-            <option value="bumblebee">bumblebee</option>
-            <option value="dracula">dracula</option>
-            <option value="forest">forest</option>
-          </select>
+          <div class="items-stretch hidden lg:flex">
+            <a class="btn btn-ghost rounded-btn">
+              Типы организаций
+            </a> 
+          </div>
+        </div>
+        <div class="flex justify-end flex-1 px-2">
+          <div class="flex items-stretch">
+            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+              <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "btn btn-ghost rounded-btn" %>
+            <% end %>
+          <div x-data="{open: false}" class="dropdown dropdown-end">
+            <div tabindex="0" class="btn btn-ghost" x-on:click="open = ! open">Тема</div>
+              <ul tabindex="0" x-show="open" x-cloack class="p-2 w-52 menu dropdown-content bg-base-100 shadow">
+                <template x-for="theme in themes" x-data="themes =
+                  [
+                    'light',
+                    'dark',
+                    'cupcake',
+                    'bumblebee',
+                    'emerald',
+                    'corporate',
+                    'synthwave',
+                    'retro',
+                    'cyberpunk',
+                    'valentine',
+                    'halloween',
+                    'garden',
+                    'forest',
+                    'aqua',
+                    'lofi',
+                    'pastel',
+                    'fantasy',
+                    'wireframe',
+                    'black',
+                    'luxury',
+                    'dracula',
+                    'cmyk'
+                  ]"
+                >
+                  <li>
+                    <a tabindex="0" x-text="theme" x-on:click="open = ! open; currentTheme = theme" class="text-base-100"/>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </header>
     <div class="container mx-auto">
       <%= @inner_content %>
     </div>
+
+    <footer class="p-4 footer bg-neutral text-neutral-content fixed bottom-0 inset-x-0">
+      <div>
+        <span class="footer-title">Services</span> 
+        <a class="link link-hover">Branding</a> 
+      </div> 
+      <div>
+        <span class="footer-title">Company</span> 
+        <a class="link link-hover">About us</a> 
+      </div> 
+      <div>
+        <span class="footer-title">Legal</span> 
+        <a class="link link-hover">Terms of use</a> 
+      </div>
+    </footer>
   </body>
 </html>
