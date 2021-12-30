@@ -1,4 +1,4 @@
-<main class="flex flex-row">
+<main>
   <p class="alert alert-info" role="alert"
     phx-click="lv:clear-flash"
     phx-value-key="info"><%= live_flash(@flash, :info) %></p>
@@ -7,7 +7,13 @@
     phx-click="lv:clear-flash"
     phx-value-key="error"><%= live_flash(@flash, :error) %></p>
 
-  <div>
-    <%= @inner_content %>
+  <div class="grid grid-cols-10 gap-4">
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8">
+      <%= @inner_content %>
+    </div>
+    <div class="col-span-1">
+    </div>
   </div>
 </main>

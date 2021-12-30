@@ -17,6 +17,8 @@ config :msir, MsirWeb.Endpoint,
   pubsub_server: Msir.PubSub,
   live_view: [signing_salt: "0CikLIse"]
 
+config :msir, MsirWeb.Gettext, default_locale: "ru"
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

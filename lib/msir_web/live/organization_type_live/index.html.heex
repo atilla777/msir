@@ -1,4 +1,6 @@
-<h1 class="text-white">Listing Organization types</h1>
+<h1 class="text-white">
+  <%= gettext("Listing %{name}", name: "Organization types") %>
+</h1>
 
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.organization_type_index_path(@socket, :index)}>
@@ -13,7 +15,7 @@
   </.modal>
 <% end %>
 
-<table class="table w-full">
+<table class="table table-zebra w-full">
   <thead>
     <tr>
       <th>Name</th>
@@ -24,11 +26,11 @@
   </thead>
   <tbody id="organization_types">
     <%= for organization_type <- @organization_types do %>
-      <tr id={"organization_type-#{organization_type.id}"}>
+      <tr id={"organization_type-#{organization_type.id}"} class="hover">
         <td><%= organization_type.name %></td>
         <td><%= organization_type.description %></td>
 
-        <td>
+        <td class="flex justify-end space-x-4">
           <span class="text-primary">
             <%= live_redirect to: Routes.organization_type_show_path(@socket, :show, organization_type) do %>
               <div data-tip="Показать" class="tooltip">
@@ -56,4 +58,14 @@
   </tbody>
 </table>
 
-<span><%= live_patch "New Organization type", to: Routes.organization_type_index_path(@socket, :new) %></span>
+
+<%= live_patch to: Routes.organization_type_index_path(@socket, :new) do %>
+  <div data-tip="Добавить" class="tooltip">
+    <div class="btn btn-primary mt-4">
+      <i class="fa-solid fa-plus pr-1"></i>
+      <span>
+        Добавить
+      </span>
+    </div>
+  </div>
+<% end %>

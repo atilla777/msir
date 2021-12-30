@@ -17,6 +17,16 @@ defmodule MsirWeb.ErrorHelpers do
     end)
   end
 
+  def error_tag(form, field, [class: class] \\ [class: "invalid-feedback"]) do
+    Enum.map(Keyword.get_values(form.errors, field), fn error ->
+      field = field |> Atom.to_string() |> String.capitalize()
+      content_tag(:span, "#{field} #{translate_error(error)}",
+        class: class,
+        phx_feedback_for: input_name(form, field)
+      )
+    end)
+  end
+
   @doc """
   Translates an error message using gettext.
   """
