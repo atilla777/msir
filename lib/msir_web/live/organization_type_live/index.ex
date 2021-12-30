@@ -6,7 +6,13 @@ defmodule MsirWeb.OrganizationTypeLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :organization_types, list_organization_types())}
+    table_options = %{
+        records: list_organization_types(),
+        schema: OrganizationType,
+        fields: %{only: [:id,  :name, :description, :inserted_at]}
+    }
+
+    {:ok, assign(socket, :table_options, table_options )}
   end
 
   @impl true

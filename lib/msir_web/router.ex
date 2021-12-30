@@ -17,15 +17,16 @@ defmodule MsirWeb.Router do
   scope "/", MsirWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live_session  :default do
+      live "/", OrganizationTypeLive.Index, :index
 
+      live "/organization_types", OrganizationTypeLive.Index, :index
+      live "/organization_types/new", OrganizationTypeLive.Index, :new
+      live "/organization_types/:id/edit", OrganizationTypeLive.Index, :edit
 
-    live "/organization_types", OrganizationTypeLive.Index, :index
-    live "/organization_types/new", OrganizationTypeLive.Index, :new
-    live "/organization_types/:id/edit", OrganizationTypeLive.Index, :edit
-
-    live "/organization_types/:id", OrganizationTypeLive.Show, :show
-    live "/organization_types/:id/show/edit", OrganizationTypeLive.Show, :edit
+      live "/organization_types/:id", OrganizationTypeLive.Show, :show
+      live "/organization_types/:id/show/edit", OrganizationTypeLive.Show, :edit
+    end
   end
 
   # Other scopes may use custom stacks.

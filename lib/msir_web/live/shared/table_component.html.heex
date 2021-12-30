@@ -1,0 +1,8 @@
+<table class="table table-zebra w-full">
+  <.table_head displayed_fields={@displayed_fields} />
+  <tbody id="records">
+    <%= for record <- @records do %>
+      <.table_row record={record} displayed_fields={@displayed_fields} socket={@socket} />
+    <% end %>
+  </tbody>
+</table>

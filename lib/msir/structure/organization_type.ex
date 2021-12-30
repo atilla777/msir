@@ -3,8 +3,8 @@ defmodule Msir.Structure.OrganizationType do
   import Ecto.Changeset
 
   schema "organization_types" do
-    field :description, :string
     field :name, :string
+    field :description, :string
 
     timestamps()
   end

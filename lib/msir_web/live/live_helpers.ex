@@ -55,6 +55,7 @@ defmodule MsirWeb.LiveHelpers do
     </div>
     """
 
+    # TODO: use or remove code below
     # ~H"""
     # <div id="modal" class="phx-modal fade-in" phx-remove={hide_modal()}>
     #   <div

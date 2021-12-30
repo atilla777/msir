@@ -15,49 +15,11 @@
   </.modal>
 <% end %>
 
-<table class="table table-zebra w-full">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="organization_types">
-    <%= for organization_type <- @organization_types do %>
-      <tr id={"organization_type-#{organization_type.id}"} class="hover">
-        <td><%= organization_type.name %></td>
-        <td><%= organization_type.description %></td>
-
-        <td class="flex justify-end space-x-4">
-          <span class="text-primary">
-            <%= live_redirect to: Routes.organization_type_show_path(@socket, :show, organization_type) do %>
-              <div data-tip="Показать" class="tooltip">
-                <i class="fa-solid fa-eye"></i>
-              </div>
-            <% end %>
-          </span>
-          <span class="text-primary">
-            <%= live_patch to: Routes.organization_type_index_path(@socket, :edit, organization_type) do %>
-              <div data-tip="Редактировать" class="tooltip">
-                <i class="fa-solid fa-pen"></i>
-              </div>
-            <% end %>
-          </span>
-          <span class="text-primary">
-            <%= link to: "#", phx_click: "delete", phx_value_id: organization_type.id, data: [confirm: "Are you sure?"] do %>
-              <div data-tip="Удалить" class="tooltip">
-                <i class="fa-solid fa-trash"></i>
-              </div>
-            <% end %>
-          </span>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<.live_component
+    module={MsirWeb.TableComponent}
+    id="organization_types"
+    table_options={@table_options}
+/>
 
 <%= live_patch to: Routes.organization_type_index_path(@socket, :new) do %>
   <div data-tip="Добавить" class="tooltip">
